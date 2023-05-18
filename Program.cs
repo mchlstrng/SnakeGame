@@ -1,4 +1,6 @@
-﻿var game = new Game(40, 20);
+﻿Console.CursorVisible = false;
+
+var game = new Game(40, 20);
 
 while (true)
 {

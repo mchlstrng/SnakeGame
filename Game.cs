@@ -53,6 +53,45 @@ public class Game
 
     internal void Update()
     {
+        //check for game over
+        if (Snake.Body.Last().X == 0 || Snake.Body.Last().X == Width - 1 || Snake.Body.Last().Y == 0 || Snake.Body.Last().Y == Height - 1)
+        {
+            Snake.IsGameOver = true;
+        }
+        if (Snake.Body.Count(b => b.X == Snake.Body.Last().X && b.Y == Snake.Body.Last().Y) > 1)
+        {
+            Snake.IsGameOver = true;
+        }
+        if (Snake.IsGameOver)
+        {
+            Console.Clear();
+            Console.WriteLine("Game Over!");
+            Console.WriteLine($"Score: {Score}");
+            Console.ReadLine();
+            Environment.Exit(0);
+        }
+
+        //check for input
+        if (Console.KeyAvailable)
+        {
+            var key = Console.ReadKey(true);
+            switch (key.Key)
+            {
+                case ConsoleKey.UpArrow:
+                    Snake.Direction = new Point(0, -1);
+                    break;
+                case ConsoleKey.DownArrow:
+                    Snake.Direction = new Point(0, 1);
+                    break;
+                case ConsoleKey.LeftArrow:
+                    Snake.Direction = new Point(-1, 0);
+                    break;
+                case ConsoleKey.RightArrow:
+                    Snake.Direction = new Point(1, 0);
+                    break;
+            }
+        }
+
         //update the game state
         Snake.Move();
         if (Snake.Body.Last().X == Food.X && Snake.Body.Last().Y == Food.Y)

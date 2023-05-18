@@ -4,6 +4,7 @@ public class Snake
 {
     public List<Point> Body { get; set; }
     public Point Direction { get; set; }
+    public bool IsGameOver { get; set; }
 
     public Snake()
     {
